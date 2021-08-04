@@ -89,12 +89,11 @@
     </table>
   </div>
 </template>
-
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "GitHubIssues",
+  name: 'GitHubIssues',
   created() {
     this.getLocalData();
   },
@@ -106,36 +105,35 @@ export default {
 
     noShowIssues() {
       return !this.issues.length && !this.loader.getIssues;
-    }
+    },
   },
 
   data() {
     return {
-      username: "",
-      repository: "",
+      username: '',
+      repository: '',
       issues: [],
       response: {
-        status: "",
-        message: ""
+        status: '',
+        message: '',
       },
       loader: {
-        getIssues: false
-      }
+        getIssues: false,
+      },
     };
   },
 
   methods: {
-
     reset() {
-      this.username = "";
-      this.repository = "";
+      this.username = '';
+      this.repository = '';
       localStorage.removeItem('gitHubIssues');
       window.location.reload();
     },
 
-   resetResponse() {
-      this.response.status = "";
-      this, (this.response.message = "");
+    resetResponse() {
+      this.response.status = '';
+      this.response.message = '';
     },
 
     getIssues() {
@@ -144,23 +142,23 @@ export default {
 
       if (this.username && this.repository) {
         localStorage.setItem(
-          "gitHubIssues",
+          'gitHubIssues',
           JSON.stringify({
             username: this.username,
-            repository: this.repository
-          })
+            repository: this.repository,
+          }),
         );
         this.loader.getIssues = true;
         const url = `https://api.github.com/repos/${this.username}/${this.repository}/issues`;
 
         axios
           .get(url)
-          .then(response => {
+          .then((response) => {
             this.issues = response.data;
           })
           .catch(() => {
-            this.response.status = "error";
-            this.response.message = "Repositório não encontrado";
+            this.response.status = 'error';
+            this.response.message = 'Repositório não encontrado';
           })
           .finally(() => {
             this.loader.getIssues = false;
@@ -169,7 +167,7 @@ export default {
     },
 
     getLocalData() {
-      const localData = JSON.parse(localStorage.getItem("gitHubIssues"));
+      const localData = JSON.parse(localStorage.getItem('gitHubIssues'));
 
       if (localData && localData.username && localData.repository) {
         this.username = localData.username;
@@ -177,7 +175,7 @@ export default {
 
         this.getIssues();
       }
-    }
-  }
+    },
+  },
 };
 </script>

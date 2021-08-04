@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Vue.js</a>
+      <a class="navbar-brand px-5 " href="#">Vue.js</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -23,6 +23,6 @@
 
 <script>
 export default {
-  name: "App"
+  name: 'App',
 };
 </script>

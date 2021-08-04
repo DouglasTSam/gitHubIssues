@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "GitHubIssue",
+  name: 'GitHubIssue',
 
   created() {
     this.getIssue();
@@ -32,10 +32,11 @@ export default {
     return {
       issue: {},
       loader: {
-        getIssue: false
-      }
+        getIssue: false,
+      },
     };
   },
+
   methods: {
     getIssue() {
       this.loader.getIssue = true;
@@ -43,13 +44,13 @@ export default {
 
       axios
         .get(url)
-        .then(response => {
+        .then((response) => {
           this.issue = response.data;
         })
         .finally(() => {
           this.loader.getIssue = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
